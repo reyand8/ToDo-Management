@@ -1,0 +1,55 @@
+type Query {
+    tasks(completed: Boolean, dueDateRange: [String], page: Int!, pageSize: Int!): TaskListResponse!
+    task(id: ID!): TaskResponse!
+}
+
+type Mutation {
+    createTask(input: TaskInput!): TaskResponse!
+    updateTask(id: ID!, input: TaskInput!): TaskResponse!
+    deleteTask(id: ID!): TaskBooleanResponse!
+    markAllCompleted: TaskListResponse!
+}
+
+
+type Task {
+    id: ID!
+    title: String!
+    description: String
+    completed: Boolean!
+    dueDate: String!
+}
+
+input TaskInput {
+    title: String
+    description: String
+    completed: Boolean
+    dueDate: String
+}
+
+type TaskResponse {
+    success: Boolean!
+    data: Task
+}
+
+type TaskBooleanResponse {
+    success: Boolean!
+    message: String!
+}
+
+type TaskListResponse {
+    success: Boolean!
+    data: [Task]
+    pageInfo: PageInfo
+}
+
+type Error {
+    message: String!
+    code: String!
+    details: [String]
+}
+
+type PageInfo {
+    currentPage: Int!
+    totalPages: Int!
+    totalItems: Int!
+}
