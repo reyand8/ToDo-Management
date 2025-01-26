@@ -1,8 +1,9 @@
 import { IPaginationResult } from '../../interfaces/Pagination.interface';
+import {ITask} from "../../interfaces/Task.interface";
 
 
-export function paginate<T>( items: T[], page: number, pageSize: number ):
-    IPaginationResult<T> {
+export function paginate( items: ITask[], page: number, pageSize: number ):
+    IPaginationResult<ITask> {
 
     if (page < 1 || pageSize < 1) {
         throw new Error("Page and pageSize must be more than 0");
@@ -14,10 +15,10 @@ export function paginate<T>( items: T[], page: number, pageSize: number ):
     const endIndex: number = startIndex + pageSize;
 
     if (startIndex >= totalItems) {
-        throw new Error("Page exceeds available data");
+        throw new Error("Page number exceeds the available data range");
     }
 
-    const paginatedItems: (T)[] = items.slice(startIndex, endIndex);
+    const paginatedItems: ITask[] = items.slice(startIndex, endIndex);
 
     return {
         data: paginatedItems,

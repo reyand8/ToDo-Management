@@ -31,7 +31,6 @@ export function validateGetTasks( completed?: boolean, dueDateRange?: string[]):
 
 /**
  * Validates that the task ID is valid.
- *
  * @param {string | number | undefined} id - The task ID to be validated.
  * @throws {InvalidInputError} - Throws an error if the task ID is not valid.
  */
@@ -72,7 +71,6 @@ export function validateTaskInput(input: Omit<ITask, 'id'>): void {
 
 /**
  * Validates the input data for updating an existing task.
- *
  * @param {Omit<ITask, 'id'>} input - The task input data to be updated, excluding the task ID.
  * @throws {ValidationError} - Throws a validation error if any input fields are invalid.
  */

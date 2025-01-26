@@ -7,10 +7,10 @@ import {
 import { DateRangeError, InvalidInputError, ValidationError } from '../src/validation/errors';
 
 
-describe('Validation Functions', () => {
+describe('validateTask', (): void => {
 
-    describe('validateGetTasks', () => {
-        it('should throw a DateRangeError for invalid ISO dates', () => {
+    describe('validateGetTasks', (): void => {
+        it('should throw a DateRangeError for invalid ISO dates', (): void => {
             try {
                 validateGetTasks(false, ['invalid', '2022-02-01T00:00:00Z']);
             } catch (error) {
@@ -28,7 +28,7 @@ describe('Validation Functions', () => {
             }
         });
 
-        it('should throw a DateRangeError if start date is after end date', () => {
+        it('should throw a DateRangeError if start date is after end date', (): void => {
             try {
                 validateGetTasks(false, ['2022-02-01T00:00:00Z', '2021-02-01T00:00:00Z']);
             } catch (error) {
@@ -40,7 +40,7 @@ describe('Validation Functions', () => {
     });
 
     describe('validateTaskId', () => {
-        it('should throw an InvalidInputError for undefined ID', () => {
+        it('should throw an InvalidInputError for undefined ID', (): void => {
             try {
                 validateTaskId(undefined);
             } catch (error) {
@@ -50,7 +50,7 @@ describe('Validation Functions', () => {
             }
         });
 
-        it('should throw an InvalidInputError for non-string ID', () => {
+        it('should throw an InvalidInputError for non-string ID', (): void => {
             try {
                 validateTaskId(123);
             } catch (error) {
@@ -61,8 +61,8 @@ describe('Validation Functions', () => {
         });
     });
 
-    describe('validateTaskInput', () => {
-        it('should throw a ValidationError for missing title', () => {
+    describe('validateTaskInput', (): void => {
+        it('should throw a ValidationError for missing title', (): void => {
             const invalidInput = {
                 title: "",
                 description: "Hello!!!",
@@ -79,7 +79,7 @@ describe('Validation Functions', () => {
             }
         });
 
-        it('should throw a ValidationError for title exceeding 100 characters', () => {
+        it('should throw a ValidationError for title exceeding 100 characters', (): void => {
             const invalidInput = {
                 title: "q".repeat(101),
                 description: "Hello!!!",
@@ -96,7 +96,7 @@ describe('Validation Functions', () => {
             }
         });
 
-        it('should throw a ValidationError for missing dueDate', () => {
+        it('should throw a ValidationError for missing dueDate', (): void => {
             const invalidInput = {
                 title: "Q".repeat(10),
                 description: "Hello!!!",
@@ -114,8 +114,8 @@ describe('Validation Functions', () => {
         });
     });
 
-    describe('validateUpdateTaskInput', () => {
-        it('should throw a ValidationError for title exceeding 100 characters', () => {
+    describe('validateUpdateTaskInput', (): void => {
+        it('should throw a ValidationError for title exceeding 100 characters', (): void => {
             const invalidInput = {
                 title: 'q'.repeat(101),
                 description: 'Description',
@@ -132,7 +132,7 @@ describe('Validation Functions', () => {
             }
         });
 
-        it('should throw a ValidationError for description exceeding 500 characters', () => {
+        it('should throw a ValidationError for description exceeding 500 characters', (): void => {
             const invalidInput = {
                 title: 'Title',
                 description: 'q'.repeat(501),
@@ -149,7 +149,7 @@ describe('Validation Functions', () => {
             }
         });
 
-        it('should throw a ValidationError for invalid dueDate', () => {
+        it('should throw a ValidationError for invalid dueDate', (): void => {
             const invalidInput = {
                 title: 'Title',
                 description: 'Description',

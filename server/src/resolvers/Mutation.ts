@@ -65,7 +65,6 @@ const Mutation: IMutation = {
 
     /**
      * Resolves the 'markAllCompleted' mutation to mark all tasks as completed.
-     *
      * @param _ - The parent mutation, unused here.
      * @returns {ISuccessResponse<ITask[]> | IErrorResponse} - The result of the mutation (updated tasks or an error).
      */

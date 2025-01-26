@@ -8,7 +8,7 @@ export class TaskStore {
     private idCounter: number = 1;
 
     /**
-     * Gets all tasks, optionally filtered by completion status and due date range.
+     * Gets all tasks, optionally filtered by completion status and/or due date range.
      * @param completed Optional boolean to filter tasks by completion status.
      * @param dueDateRange Optional date range (start and end) to filter tasks by due date.
      * @returns An array of tasks that match the provided filters.

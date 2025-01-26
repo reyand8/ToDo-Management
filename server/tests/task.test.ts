@@ -3,15 +3,15 @@ import { TaskStore } from '../src/models/Task';
 import { NotFoundError } from '../src/validation/errors';
 
 
-describe('TaskStore', () => {
+describe('TaskStore', (): void => {
     let taskStore: TaskStore;
 
-    beforeEach(() => {
+    beforeEach((): void => {
         taskStore = new TaskStore();
     });
 
     describe('createTask', () => {
-        it('should create a task and return it with an id', () => {
+        it('should create a task and return it with an id', (): void => {
             const newTask: Omit<ITask, 'id'> = {
                 title: 'Title',
                 description: 'description',
@@ -19,7 +19,7 @@ describe('TaskStore', () => {
                 completed: false,
             };
 
-            const createdTask = taskStore.createTask(newTask);
+            const createdTask: ITask = taskStore.createTask(newTask);
 
             expect(createdTask).toHaveProperty('id');
             expect(createdTask.title).toBe('Title');
@@ -28,8 +28,8 @@ describe('TaskStore', () => {
         });
     });
 
-    describe('getAllTasks', () => {
-        it('should return all tasks', () => {
+    describe('getAllTasks', (): void => {
+        it('should return all tasks', (): void => {
             const task1: Omit<ITask, 'id'> = {
                 title: 'Task 1',
                 description: 'Description',
@@ -45,13 +45,13 @@ describe('TaskStore', () => {
             taskStore.createTask(task1);
             taskStore.createTask(task2);
 
-            const tasks = taskStore.getAllTasks();
+            const tasks: ITask[] = taskStore.getAllTasks();
             expect(tasks).toHaveLength(2);
             expect(tasks[0].title).toBe('Task 1');
             expect(tasks[1].title).toBe('Task 2');
         });
 
-        it('should filter tasks by due date range', () => {
+        it('should filter tasks by due date range', (): void => {
             const task1: Omit<ITask, 'id'> = {
                 title: 'Task 1',
                 description: 'Description',
@@ -67,7 +67,7 @@ describe('TaskStore', () => {
             taskStore.createTask(task1);
             taskStore.createTask(task2);
 
-            const tasksInRange = taskStore.getAllTasks(undefined,
+            const tasksInRange: ITask[] = taskStore.getAllTasks(undefined,
                 ['2022-01-01T00:00:00Z', '2022-01-01T23:59:59Z']);
             expect(tasksInRange).toHaveLength(1);
             expect(tasksInRange[0].title).toBe('Task 1');
@@ -76,40 +76,40 @@ describe('TaskStore', () => {
 
     describe('getTaskById', () => {
         it('should return a task by its id', () => {
-            const newTask = taskStore.createTask({
+            const newTask: ITask = taskStore.createTask({
                 title: 'Title',
                 description: 'Description',
                 dueDate: '2022-01-01T00:00:00Z',
                 completed: false,
             });
 
-            const foundTask = taskStore.getTaskById(newTask.id);
+            const foundTask: ITask = taskStore.getTaskById(newTask.id);
 
             expect(foundTask).toEqual(newTask);
         });
 
-        it('should throw a NotFoundError when the task is not found', () => {
+        it('should throw a NotFoundError when the task is not found', (): void => {
             expect(() => taskStore.getTaskById('id')).toThrow(NotFoundError);
             expect(() => taskStore.getTaskById('id')).toThrowError('Task with ID id not found');
         });
     });
 
-    describe('updateTask', () => {
-        it('should update a task', () => {
-            const newTask = taskStore.createTask({
+    describe('updateTask', (): void => {
+        it('should update a task', (): void => {
+            const newTask: ITask = taskStore.createTask({
                 title: 'Title',
                 description: 'Description',
                 dueDate: '2022-01-01T00:00:00Z',
                 completed: false,
             });
 
-            const updatedTask = taskStore.updateTask(newTask.id, { completed: true });
+            const updatedTask: ITask | null = taskStore.updateTask(newTask.id, { completed: true });
 
             expect(updatedTask).not.toBeNull();
             expect(updatedTask?.completed).toBe(true);
         });
 
-        it('should return null if the task to update does not exist', () => {
+        it('should return null if the task to update does not exist', (): void => {
             expect(() => taskStore.updateTask('id', { completed: true }))
                 .toThrowError(NotFoundError);
             expect(() => taskStore.updateTask('id', { completed: true }))
@@ -117,37 +117,37 @@ describe('TaskStore', () => {
         });
     });
 
-    describe('deleteTask', () => {
-        it('should delete a task', () => {
-            const newTask = taskStore.createTask({
+    describe('deleteTask', (): void => {
+        it('should delete a task', (): void => {
+            const newTask: ITask = taskStore.createTask({
                 title: 'Title',
                 description: 'Description',
                 dueDate: '2022-01-01T00:00:00Z',
                 completed: false,
             });
 
-            const deleteResult = taskStore.deleteTask(newTask.id);
+            const deleteResult: boolean = taskStore.deleteTask(newTask.id);
             expect(deleteResult).toBe(true);
 
-            const tasks = taskStore.getAllTasks();
+            const tasks: ITask[] = taskStore.getAllTasks();
             expect(tasks).toHaveLength(0);
         });
 
-        it('should return false if the task to delete does not exist', () => {
-            const deleteResult = taskStore.deleteTask('id');
+        it('should return false if the task to delete does not exist', (): void => {
+            const deleteResult: boolean = taskStore.deleteTask('id');
             expect(deleteResult).toBe(false);
         });
     });
 
-    describe('markAllCompleted', () => {
-        it('should mark all tasks as completed', () => {
-            const task1 = taskStore.createTask({
+    describe('markAllCompleted', (): void => {
+        it('should mark all tasks as completed', (): void => {
+            const task1: ITask = taskStore.createTask({
                 title: 'Title',
                 description: 'Description',
                 dueDate: '2022-01-01T00:00:00Z',
                 completed: false,
             });
-            const task2 = taskStore.createTask({
+            const task2: ITask = taskStore.createTask({
                 title: 'Task',
                 description: 'Description',
                 dueDate: '2022-01-02T00:00:00Z',
