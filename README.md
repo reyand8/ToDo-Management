@@ -5,8 +5,8 @@ ____
 
 ## 📜 Main Information
 
-The ToDo-Management application was built with GraphQL, TS and Apollo Server. It is a mini to-do list
-that supports task creation, updates, deletion, filtering and error handling with in-memory storage. 
+The ToDo-Management application was built with Node.js GraphQL, TS and Apollo Server. It is a mini to-do list
+that supports CRUD operations, filtering and error handling with in-memory storage. 
 It also includes input validation.
 
 ____

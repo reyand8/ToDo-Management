@@ -15,8 +15,8 @@ const resolvers: { Query: IQuery, Mutation: IMutation} = {
 };
 
 /**
- * Initializes an Apollo Server instance.
- * - Loads type definitions from a GraphQL schema file (`schema.graphql`).
+ * Apollo Server initialization.
+ * - Loads type definitions from schema.graphql.
  * - Defines resolvers for queries and mutations.
  * - Configures custom error formatting for the response.
  * - Sets up the response formatting to handle HTTP status codes based on errors.
