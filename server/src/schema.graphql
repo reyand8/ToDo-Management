@@ -38,7 +38,7 @@ type TaskBooleanResponse {
 
 type TaskListResponse {
     success: Boolean!
-    data: [Task]
+    data: [Task!]!
     pageInfo: PageInfo
 }
 
